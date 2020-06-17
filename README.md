@@ -5,7 +5,7 @@ A Website to manage the events of CCBD which include the BootCamp, Assignment an
 - **templates** Folder - It has the HTML Files needed.
 - *ccbd.py* - The main flask-python script.
 # Required Packages
-1. FLask
+1. Flask
 2. bcrypt
 3. Flask-PyMongo
 ```sh
