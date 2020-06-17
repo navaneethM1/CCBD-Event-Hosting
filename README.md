@@ -1,6 +1,6 @@
 # CCBD-Event-Hosting
 A Website to manage the events of CCBD which includes the BootCamp, Assignment and Internship Project
-# Files
+# Folders and Files
 - **static** Folder - It has the main.css file which styles the website.
 - **templates** Folder - It has the HTML Files needed.
 - *ccbd.py* - The main flask-python script.
