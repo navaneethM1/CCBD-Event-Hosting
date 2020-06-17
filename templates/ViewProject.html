@@ -1,0 +1,8 @@
+{% extends "Layout.html" %}
+{% block content %}
+{%if status==true and select==true and project_view and shortlisted %}
+	<h2>Your Project Topic</h2>
+		<p>{{ topic }}</p>
+	</div>
+{%endif%}
+{% endblock %}

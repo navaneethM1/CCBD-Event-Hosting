@@ -1,0 +1,42 @@
+{% extends "Layout.html" %}
+{% block content %}
+{%if status==true and select==true%}
+	<h2>Your Team</h2>
+	<br>
+	<div>
+		{% for student in students_info %}
+			<h3 class="border-bottom border-danger" style="width: 60%;">{{ student.firstname.capitalize() + ' ' + student.lastname.capitalize() }}</h3>
+			<div class="row">
+				<div class="col-4 col-md-3">
+					Department
+				</div>
+				<div class="col-4 col-md-3" style="color: rgb(115,115,115);">
+					{{ student.department }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4 col-md-3">
+					Email
+				</div>
+				<div class="col-4 col-md-3" style="color: rgb(115,115,115);">
+					{{ student.email }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4 col-md-3">
+					Phone
+				</div>
+				<div class="col-4 col-md-3" style="color: rgb(115,115,115);">
+					{{ student.contactnumber }}
+				</div>
+			</div>
+			<br>
+		{% endfor %}
+	</div>
+	<br>
+	<div>
+		<h2>Your Assignment Topic</h2>
+		<p>{{ topic }}</p>
+	</div>
+{%endif%}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "Layout.html" %}
+{% block content %}
+	{%if status==true and select==true%}
+	{% with message = get_flashed_messages()[0] %}
+	  {% if message == '1' %}
+	  	<div class="alert alert-success mt-3" role="alert" style="width: 50%;">
+		  <p>Congratulations! We are happy to inform you that your team has been shortlisted!</p>
+		</div>
+	  {% else %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  <p>Sorry, we are sad to inform you that your team has not been shortlisted</p>
+		</div>
+	  {% endif %}
+	{% endwith %}
+	{% endif %}
+{% endblock %}

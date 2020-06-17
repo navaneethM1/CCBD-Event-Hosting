@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  	<head>
+	  	<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  	</head>
+  	<body>
+	  	<div class="container ">
+	  		<h1 ><center>Teacher Register</center></h1>
+	  	</div>
+	  	<div class="row justify-content-center">
+	  		<div class="col-4 align-self-center">
+			  	<form method = "POST" action="#">
+			  		<div class="form-group">
+					    <label for="exampleInputName1">First Name</label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="firstname">
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputName1">Last Name</label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="lastname">
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputName1">Contact Number</label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="contactnumber">
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Email address</label>
+					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputPassword1">Password</label>
+					    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+				  	</div>
+				  	<button type="submit" class="btn btn-primary">Submit</button></br>
+				  	
+				</form>
+				<small>Already Have An Account, Please<button class="btn btn-link" ><h5><a href="{{url_for('teacherLogin')}}">Login
+				</a></h5>
+				</button></small>
+			</div>
+		</div>
+  	</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "Layout.html" %}
+{% block content %}
+	{% with message = get_flashed_messages()[0] %}
+	  {% if message %}
+	  	<div class="alert alert-success mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% endif %}
+	{% endwith %}
+	<h2>About</h2>
+	<div style="width: 50%;">
+		<div class="row">
+			<div class="col-4 col-md-6">
+				Name
+			</div>
+			<div class="col-4 col-md-6" style="color: rgb(115, 115, 115);">
+				{{ Student.firstname.capitalize() + ' ' + Student.lastname.capitalize() }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 col-md-6">
+				Department
+			</div>
+			<div class="col-4 col-md-6" style="color: rgb(115, 115, 115);">
+				{{ Student.department }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 col-md-6">
+				Email
+			</div>
+			<div class="col-4 col-md-6" style="color: rgb(115, 115, 115);">
+				{{ Student.email }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 col-md-6">
+				Phone
+			</div>
+			<div class="col-4 col-md-6" style="color: rgb(115, 115, 115);">
+				{{ Student.contactnumber }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

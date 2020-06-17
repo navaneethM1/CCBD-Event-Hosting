@@ -1,0 +1,44 @@
+{% extends "Layout.html" %}
+{% block content %}
+	<h2>Your Bootcamp Attendance</h2>
+	<br>
+	<table class="table table-striped table-bordered text-center w-25">
+		<tr>
+			<th class="text-center">Day</th>
+			<th class="text-center">Attended?</th>
+		</tr>
+		<tr>
+			{% if Student.day1 %}
+				<td>Day 1</td>
+				<td>Present</td>
+			{% else %}
+				<td class="text-danger">Day 1</td>
+				<td class="text-danger">Absent</td>
+			{% endif %}
+		</tr>
+		<tr>
+			{% if Student.day2 %}
+				<td>Day 2</td>
+				<td>Present</td>
+			{% else %}
+				<td class="text-danger">Day 2</td>
+				<td class="text-danger">Absent</td>
+			{% endif %}
+		</tr>
+		<tr>
+			{% if Student.day3 %}
+				<td>Day 3</td>
+				<td>Present</td>
+			{% else %}
+				<td class="text-danger">Day 3</td>
+				<td class="text-danger">Absent</td>
+			{% endif %}
+		</tr>
+	</table>
+	<!-- status is true after bootcamp is over and assignments topics are prepared -->
+	{% if status and select==false %}
+		<div class="alert alert-danger" style="width: 50%;">
+			<p>Sorry, you are not eligible to continue in our further programme as you have not attended all the 3 days of the CCBD Bootcamp</p>
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "Layout.html" %}
+{% block content %}
+{%if status==true and select== true%}
+	{% set i = namespace(value = 1) %}
+	{% for assignment in assignments %}
+		<div class=" jumbotron mb-5 bg-light" style="width: 80%;">
+			<h2 style="font-size: 2.8rem;">Topic {{ i.value }} : {{ assignment.topic }}</h1>
+			<hr>
+			<p class="lead" style="text-indent: 6rem; font-size: 1.6rem;">{{ assignment.desc }}</p>
+		</div>
+		{% set i.value = i.value + 1 %}
+	{% endfor %}
+{%endif%}
+{% endblock %}

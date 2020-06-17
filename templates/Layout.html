@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Student Home Page
+  </title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="nav-side-menu">
+        <div class="brand container-fluid" style="float: left;">
+          <a href="{{ url_for('home') }}"><i class="fa fa-home" aria-hidden="true" style="font-size: 3rem;"></i></a>
+          Welcome, {{ Student.firstname.capitalize() }}!
+        </div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>         
+          <div class="menu-list" id="menu-content">
+            <div class="text-success">
+              <h3>Bootcamp</h3>
+            </div>
+            <ul class="menu-content">
+              <li class="{% if request.url.split('/')[-1] == 'attendance' %}
+                  active
+                {% endif %}">
+                <a href="{{ url_for('attendance') }}" class="mx-3">
+                  Attendance
+                </a>
+              </li>
+            </ul>
+            <br>
+            {%if status==true and select==true%}
+            <div class="text-success">
+              <h3>Assignment</h3>
+            </div>
+            
+            <ul class="menu-content">
+              <li class="{% if request.url.split('/')[-1] == 'viewAssignments' %}
+                  active
+                {% endif %}">
+                
+                <a href="{{ url_for('viewAssignments') }}" class="mx-3">
+                  Topics
+                </a>
+
+              </li>
+              <li class="{% if request.url.split('/')[-1] == 'teamForm' %}
+                  active
+                {% endif %}">
+                <a href="{{ url_for('teamForm') }}" class="mx-3">
+                  Fill Form
+                </a>
+              </li>
+            </ul>
+            <br>
+            <div class="text-success">
+              <h3>Your Team</h3>
+            </div>
+            <ul class="menu-content">
+              <li class="{% if request.url.split('/')[-1] == 'teamInfo' %}
+                  active
+                {% endif %}">
+                <a href="{{ url_for('teamInfo') }}" class="mx-3">
+                  Team Details
+                </a>
+              </li>
+            </ul>
+            
+            <br>
+            {% if show_assgn_shortlist_msg %}
+              <div class="text-success">
+                <h3>Assignment Results</h3>
+              </div>
+              <ul class="menu-content">
+                <li class="{% if request.url.split('/')[-1] == 'assgnResults' %}
+                    active
+                  {% endif %}">
+                  <a href="{{ url_for('assgnResults') }}" class="mx-3">
+                    Results
+                  </a>
+                </li>
+              </ul>
+            {% endif %}
+            {% if project_view and shortlisted %}
+              <div class="text-success">
+                <h3>Project</h3>
+              </div>
+              <ul class="menu-content">
+                <li class="{% if request.url.split('/')[-1] == 'viewProject' %}
+                    active
+                  {% endif %}">
+                  <a href="{{ url_for('viewProject') }}" class="mx-3">
+                    View Project
+                  </a>
+                </li>
+              </ul>
+            {% endif %}
+            {% endif %}
+            <br>
+            <br>
+            <ul class="menu-content" style="float: right;">
+              <li>
+                <a href="{{ url_for('logout') }}" class="mx-3" style="border-bottom: none;">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-8 container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+</body>
+</html>

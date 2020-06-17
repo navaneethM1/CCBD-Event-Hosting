@@ -1,0 +1,105 @@
+{% extends "Layout.html" %}
+{% block content %}
+{%if status==true and select==true%}
+	{% with message = get_flashed_messages()[0] %}
+	  {% if message == 'Team Registration Unsuccessful. Incorrect SRN or Email' %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% elif message == 'You should be one of the team members!' %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% elif message == 'Please form a team and fill in the Team Details' %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% elif message == 'You did not pick a topic' %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% elif message == 'One of the students has not attended Bootcamp on all the 3 days' %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% elif message %}
+	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
+		  {{ message }}
+		</div>
+	  {% endif %}
+	{% endwith %}
+	<div style="width: 50%;">
+		<form method="POST" action="#">
+		  <div>
+		  	<h2 style="margin-bottom: 3%;">Team Member 1*</h1>
+		  	<div class="form-group">
+		    	<label for="Email1">Email address</label>
+		    	<input name="Email1" type="email" class="form-control" id="Email1" aria-describedby="emailHelp" required autocomplete="off">
+		  	</div>
+		  	<div class="form-group">
+		    	<label for="SRN1">SRN</label>
+		    	<input name="SRN1" type="text" class="form-control" id="SRN1" required autocomplete="off">
+		  	</div>
+		  </div>
+		  <br>
+		  <hr>
+		  <br>
+		  <div>
+		  	<h2 style="margin-bottom: 3%;">Team Member 2*</h1>
+		  	<div class="form-group">
+		    	<label for="Email2">Email address</label>
+		    	<input name="Email2" type="email" class="form-control" id="Email2" aria-describedby="emailHelp" required autocomplete="off">
+		  	</div>
+		  	<div class="form-group">
+		    	<label for="SRN2">SRN</label>
+		    	<input name="SRN2" type="text" class="form-control" id="SRN2" required autocomplete="off">
+		  	</div>
+		  </div>
+		  <br>
+		  <hr>
+		  <br>
+		  <div>
+		  	<h2 style="margin-bottom: 3%;">Team Member 3</h1>
+		  	<div class="form-group">
+		    	<label for="Email3">Email address</label>
+		    	<input name="Email3" type="email" class="form-control" id="Email3" aria-describedby="emailHelp" autocomplete="off">
+		  	</div>
+		  	<div class="form-group">
+		    	<label for="SRN3">SRN</label>
+		    	<input name="SRN3" type="text" class="form-control" id="SRN3" autocomplete="off">
+		  	</div>
+		  </div>
+		  <br>
+		  <hr>
+		  <br>
+		  <div>
+		  	<h2 style="margin-bottom: 3%;">Team Member 4</h1>
+		  	<div class="form-group">
+		    	<label for="Email4">Email address</label>
+		    	<input name="Email4" type="email" class="form-control" id="Email4" aria-describedby="emailHelp" autocomplete="off">
+		  	</div>
+		  	<div class="form-group">
+		    	<label for="SRN4">SRN</label>
+		    	<input name="SRN4" type="text" class="form-control" id="SRN4" autocomplete="off">
+		  	</div>
+		  </div>
+		  <br>
+		  <hr>
+		  <br>
+		  <div class="form-group">
+			<label for="sel1"><h2>Pick a Topic*</h2></label>
+			<select class="form-control" id="sel1" name="topic" required="required" style="height: 30px;">
+				<option disabled selected>
+					Please choose a topic
+				</option>
+				{% for topic in topics %}
+					<option value="{{ topic }}">{{ topic }}</option>
+				{% endfor %}
+			</select>
+		  </div>
+		  <br>
+		  <button type="submit" class="btn border-info btn-outline-info mb-5 btn-lg">Submit</button>
+		</form>
+	</div>
+{%endif%}
+{% endblock %}

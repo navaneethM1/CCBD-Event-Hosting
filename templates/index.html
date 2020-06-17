@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+  	<div class="container">
+  		<h1>Welcome to CCBD</h1>
+  	</div>
+  	<nav class="navbar navbar-expand-lg  bg-light my-2">
+	  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	    	<button type="button" class="btn btn-outline-primary btn-link mr-4">
+	        	<a class="nav-link" href="{{ url_for('adminLogin') }}">Are You The Admin? <span class="sr-only">(current)</span></a>
+	      	</button>
+	      	<button type="button" class="btn btn-outline-primary btn-link mr-4">
+	        	<a class="nav-link" href="{{ url_for('teacherLogin') }}">Are You A Teacher? <span class="sr-only">(current)</span></a>
+	      	</button>
+	      	<button type="button" class="btn btn-outline-primary btn-link mr-1">
+	        	<a class="nav-link" href="{{url_for('studentLogin')}}">Are You A Student? <span class="sr-only">(current)</span></a>
+	      	</button>
+	    </ul>
+	  </div>
+	</nav>
+  </body>
+</html>
