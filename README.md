@@ -12,6 +12,7 @@ A Website to manage the events of CCBD which include the BootCamp, Assignment an
 $ pip install Flask
 $ pip install bcrypt
 $ pip install Flask-PyMongo
+$ pip install dnspython
 ```
 # Building
 ```sh
