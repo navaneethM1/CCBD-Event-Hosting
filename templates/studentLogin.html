@@ -4,40 +4,69 @@
 	  	<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+	    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+	    <style>
+	    	body{
+	    		background-image: url("/static/index_img2.jpg");
+	    		background-repeat: no-repeat;
+				background-attachment: fixed;  
+				background-size: cover;
+	    	}
+	    </style>
   	</head>
   	<body>
-  		
-	  	<div class="container ">
-	  		<h1 ><center>Student Login</center></h1>
-	  	
-		  	<div class=" row justify-content-center">
-			  	{% with message = get_flashed_messages()[0] %}
-			  	{% if message == 'Incorrect email or password' %}
-			  		<div class="alert alert-danger mt-3 " role="alert" style="width: 24%;">
-				  	<center>{{ message }}</center>
+  		<div class="container">
+		  	<div class="row">
+		    	<div class="col">
+		    	</div>
+		    	<div class="col col-lg-4">
+		    		<div style="padding:20px">
+		    			<a type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,153);float:right; " href="{{url_for('index')}}" >
+		    				<ion-icon name="caret-back"></ion-icon>Back To Home</a>
+		    		</div>
+		     		<h1 style="color:white; padding-top:100px"><center>Student Login</center></h1>
+		     		<div class="row justify-content-center">
+			  			{% with message = get_flashed_messages()[0] %}
+			  			{% if message == 'Incorrect email or password' %}
+				  		<div class="alert alert-danger mt-3 " role="alert" style="width: 65%;">
+					  		{{ message }}
+						</div>
+						{% endif %}
+						{% endwith %}
+					</div><br><br><br>
+					<div class="row justify-content-center">
+				  		<div class="col align-self-center">
+						  	<form method = "POST" action="#">
+							  	<div class="form-group">
+								    <label for="exampleInputEmail1" style="color:white;">Email address</label>
+								    <div class="input-group">
+    									<div class="input-group-addon">
+      										<i class='fas fa-user-alt' style="font-size:20px;border-style: solid;border-width: 9px ;border-color:white;color: rgb(255,241,255)"></i> 
+    									</div>
+								    	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" style="font-family: 'Roboto Mono', monospace;" placeholder="Enter Your Login Id">
+								    </div>
+							  	</div>
+							  	<div class="form-group">
+								    <label for="exampleInputPassword1" style="color:white;">Password</label>
+								    <div class="input-group">
+    									<div class="input-group-addon">
+      										<i class='fa fa-lock' style="font-size:20px;border-style: solid;border-width: 9px ;border-color:white;color: rgb(255,241,255)"></i> 
+    									</div>
+								    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+								</div>
+							  	</div>
+							  	<button type="submit" class="btn btn-primary" style="color:white;background-color: rgb(0,0,153);">Submit</button></br>
+							</form>
+							<small style="color:white;">If You Don't Have An Account, Please<button class="btn btn-link" ><h5><a href="{{url_for('studentSignUp')}}" style="color:white;">Sign Up
+							</a></h5>
+							</button></small>
+						</div>
 					</div>
-				{% endif %}
-				{% endwith %}
-			</div>
-		</div>
-	  	<div class="row justify-content-center">
-	  		<div class="col-4 align-self-center">
-			  	<form method = "POST" action="#">
-				  	<div class="form-group">
-					    <label for="exampleInputEmail1">Email address</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
-				  	</div>
-				  	<div class="form-group">
-					    <label for="exampleInputPassword1">Password</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
-				  	</div>
-				  	<button type="submit" class="btn btn-primary">Submit</button></br>
-				  	
-				</form>
-				<small>If You Don't Have An Account, Please<button class="btn btn-link" ><h5><a href="{{url_for('studentSignUp')}}">Sign Up
-				</a></h5>
-				</button></small>
-			</div>
+		    	</div>
+		  	</div>
 		</div>
   	</body>
 </html>

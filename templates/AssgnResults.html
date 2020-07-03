@@ -3,12 +3,15 @@
 	{%if status==true and select==true%}
 	{% with message = get_flashed_messages()[0] %}
 	  {% if message == '1' %}
-	  	<div class="alert alert-success mt-3" role="alert" style="width: 50%;">
-		  <p>Congratulations! We are happy to inform you that your team has been shortlisted!</p>
+	  	<div style="padding-top: 100px">
+		  	<div class="alert" role="alert" style="background-color: rgb(0,204,255);width: 68%">
+			  <p>Congratulations! We are happy to inform you that your team has been shortlisted!</p>
+			  <p>You are requested to keep yourself updated with the happenings on the website</p>
+			</div>
 		</div>
 	  {% else %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  <p>Sorry, we are sad to inform you that your team has not been shortlisted</p>
+	  	<div class="alert" role="alert" style="background-color: rgb(38, 38, 38);width: 68%;">
+		  <p style="color:white"><B><I>Sorry, we are sad to inform you that your team has not been shortlisted</I></B></p>
 		</div>
 	  {% endif %}
 	{% endwith %}

@@ -1,81 +1,95 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<style>
-			#check{
-				fill:green;
-			}
-		</style>
-	  	<meta charset="utf-8">
+		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+	    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+	    <style>
+	    	body{
+	    		background-image: url("/static/assignment_cloud.jpeg");
+	    		background-repeat: no-repeat;
+				background-attachment: fixed;  
+				background-size: cover;
+	    	}
+	    </style>
   	</head>
 	<body>
+		<div >
+			<h3 style="background-color: rgb(0,0,153); color:white; height: 60px"><center style="padding-top:10px">Prof. {{user_fn}} {{user_ln}} - Project Team Details And Evaluation  </center></h3>
+			<div style="padding-right: 20px">
+				<a href="{{url_for('teacher_home')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:left; "><i class='fas fa-reply'></i> Back
+	        	</a>
+				<a href="{{url_for('logout_t')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:right; ">Log out<i class="fa fa-sign-out-alt" style="font-size:24px; padding-left: 4px"></i> 
+	        	</a>
+	        </div>
+		</div>
+		<center>
 		{%if status%}
 		{% with message = get_flashed_messages()[0] %}
 	  		{% if message == 'This team is already evaluated' %}
-			  	<div class="alert alert-danger" role="alert" style="width: 50%;">
-				  	{{ message }}
+			  	<div class="alert" role="alert" style="background-color: rgb(0,204,255);width: 30%;">
+				  	<center>{{ message }}</center>
 				</div>
 	 
 		  	{% endif %}
 		{% endwith %}
-		<div class="jumbotron">
-			<h3><center>Welcome To Your Project Page</center></h3>
-			
-        	<a href="{{url_for('logout_t')}}" class="btn btn-info btn-sm mx-3" style="border-bottom: none; float:right;"> Log out
-        	</a>
-      
-		</div>
-		<div class="jumbotron">
-			<h4> This is the list of  topics for the CCBD Final Project </h4>
-		</div>
-		<div class="container" id="1">
-			<table class="table table-striped table-bordered"> 
-				<thead>
-				    <tr>
-				      	<th scope="col">Topics</th>
-				      	
-				    </tr>
-  				</thead>
-  				<tbody>
-				{% for t in topics %}
-				<tr>
-			      	<td>{{t.topic}}</td>
-		    	</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
-		<div class="jumbotron">
-			<h4> Team details of the CCBD Project </h4>
-		</div>
-		<div class="container" id="2">
-			<table class="table table-striped table-bordered"> 
-				<thead>
-				    <tr>
-				      	<th scope="col">Team_name</th>
-				      	<th scope="col">Topic</th>
-				      	<th scope="col">Evaluation Status</th>
-				    </tr>
-  				</thead>
-  				<tbody>
-				{% for q in team %}
-				<tr>
-					
-			      	<td ><a href="/my_func1/{{q.key}}">{{q.key}}</a></td>
-			      	<td>{{q.value}}</td>
-			      	{%if q.status=="evaluated"%}
-			      	<td><h3><center><i class="fas fa-check-circle " style="color:green"></i></center></h3></td>
-			      	{%elif q.status=="Yet To Be Evaluated" %}
-			      	<td><center><I>Yet To Evaluate</I></center></td>
-			      	{%endif%}
-		    	</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-			
+		</center>
+		<div class="container" style="padding-top:100px">
+			<div class="row">
+				<div class="col-6" style="padding-right: 60px;float:left;">
+					<table class="table table-striped table-bordered" style="padding-top:50px;width:500px"> 
+						<thead class="thead-dark">
+							<tr><th colspan="3"><h4>Team Details of the CCBD Final Project</h4></th></tr>
+						    <tr>
+						    	<th scope="col"><center>Team Id</center></th>
+						      	<th scope="col"><center>Topic</center></th>
+						      	<th scope="col"><center>Guide</center></th>
+						    </tr>
+		  				</thead>
+		  				<tbody>
+						{% for t in team %}
+						<tr>
+					      	<td><a style="color:white;" href="/display_team_details/{{t.key}}"><center><B style="color:white">{{t.key}}</B></center></a></td>
+					      	<td><center><B style="color:white">{{t.value}}</B></center></td>
+					      	<td><center><B style="color:white">{{t.guide}}</B></center></td>
+				    	</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>	
+				<div class="col-6" style="padding-left: 100px">
+					<table class="table table-striped table-bordered" > 
+						<thead class="thead-dark">
+							<tr><th colspan="2"><h4>Evaluation of the CCBD Final Project</h4></th></tr>
+						    <tr>
+						      	<th scope="col"><center>Team_name</center></th>
+						      	<th scope="col"><center>Evaluation Status</center></th>
+						    </tr>
+		  				</thead>
+		  				<tbody>
+						{% for q in team %}
+						<tr>
+							
+					      	<td ><a style="color:white;" href="/my_func1/{{q.key}}"><center><B style="color:white">{{q.key}}</B></center></a></td>
+					      	{%if q.status=="evaluated"%}
+					      	<td><center><i class="fa fa-check-circle" aria-hidden="true" style="font-size: 22px;color:rgb(0,204,255)"></i></center></td>
+					      	{%elif q.status=="Yet To Be Evaluated" %}
+					      	<td><center><I><center><B style="color:white">Yet To Evaluate</B></center></I></center></td>
+					      	{%endif%}
+				    	</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 		{%endif%}
 	</body>

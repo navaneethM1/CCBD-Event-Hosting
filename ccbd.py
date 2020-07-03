@@ -2,14 +2,22 @@
 from flask import Flask, render_template, url_for, request, session, redirect,flash, make_response
 from flask_pymongo import PyMongo
 import bcrypt
-
+import os
+from werkzeug.utils import secure_filename
 # app setup
+
+UPLOAD_FOLDER = os.getcwd() + '/static'
+ALLOWED_EXTENSIONS = {'jpg'}
+
 app = Flask(__name__)
 app.config['MONGO_DBNAME']='CCBD'
 app.config['MONGO_URI']='mongodb+srv://Rakshith:rakshith123@cluster0-u7vm7.gcp.mongodb.net/CCBD?retryWrites=true&w=majority'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 mongo = PyMongo(app)
 
-
+# helper function
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 #-----------------------------------------------------------------------------#
 #-------------------------------Index Page------------------------------------#
@@ -22,7 +30,13 @@ mongo = PyMongo(app)
 def index():
 	return render_template('index.html')
 
+@app.route('/about_ccbd')
+def ccbd_info():
+	return render_template('About.html')
 
+@app.route('/about_website')
+def website():
+	return render_template('website.html')
 
 #---------------------------------------------------------------------------------------------------#
 #-------------------------------Student and Teacher SignUp,Login------------------------------------#
@@ -80,10 +94,16 @@ def teacherSignUp():
     if request.method == 'POST':
         users = mongo.db.faculty
         existing_user = users.find_one({'email' : request.form['email']})
-
+        img = request.files['img']
+        if img.filename == '':
+            flash('Please upload your photo')
+            return redirect(url_for('teacherSignUp'))
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'firstname' : request.form['firstname'],'lastname' : request.form['lastname'], 'contactnumber' : request.form['contactnumber'],'email' : request.form['email'],'password' : hashpass})
+            if img and allowed_file(img.filename):
+            	filename = request.form['firstname'] + request.form['lastname'] + '.jpg'
+            	img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('teacherLogin'))
         
         return render_template('teacherSignUp.html')
@@ -350,9 +370,10 @@ def viewProject():
 		)
 	is_shortlisted = team['shortlisted']
 	topic = mongo.db.project_topics.find_one({'_id': team['project']})['topic']
+	guide = mongo.db.project_topics.find_one({'_id': team['project']})['guide']
 	status=mongo.db.form_status.find_one({'_id':1})
 	allowed=Student['select']
-	return render_template('ViewProject.html', Student=Student, topic=topic, status=status['assign_view'] ,select=allowed, show_assgn_shortlist_msg=status['show_assgn_shortlist_msg'], project_view=status['project_view'], shortlisted=is_shortlisted)
+	return render_template('ViewProject.html', Student=Student, topic=topic,guide=guide, status=status['assign_view'] ,select=allowed, show_assgn_shortlist_msg=status['show_assgn_shortlist_msg'], project_view=status['project_view'], shortlisted=is_shortlisted)
 
 
 @app.route('/logout')
@@ -416,14 +437,19 @@ def check_valid(team_srn, team_email):
 
 @app.route('/teacher_home')
 def teacher_home():
-	return render_template('teacher_home.html')
+	email=session['email']
+	user=mongo.db.faculty.find_one({'email':email})
+	img_name=user['firstname']+user['lastname']+".jpg"
+	return render_template('teacher_home.html',user_fn=user['firstname'],user_ln=user['lastname'],img_name=img_name)
 
 
 @app.route('/bootcamp')
 def bootcamp():
 	data = mongo.db.student
 	query = data.find( {} )
-	return render_template('bootcamp.html',query=query) 
+	email=session['email']
+	user=mongo.db.faculty.find_one({'email':email})
+	return render_template('bootcamp.html',query=query,user_fn=user['firstname'],user_ln=user['lastname']) 
 
 
 @app.route('/assignment', methods=['GET','POST'])
@@ -432,7 +458,9 @@ def assignment():
 	topics=mongo.db.assignment_topics.find({})
 	l=group()
 	status=mongo.db.form_status.find_one({'_id':1})
-	return render_template('assignment.html',topics=topics,team=l,status=status['show_assign_teacher'])
+	email=session['email']
+	user=mongo.db.faculty.find_one({'email':email})
+	return render_template('assignment.html',user_fn=user['firstname'],user_ln=user['lastname'],topics=topics,team=l,status=status['show_assign_teacher'])
 
 
 @app.route('/assignment_evaluation/<id1>', methods=['POST','GET'])
@@ -489,7 +517,9 @@ def project():
 	topics=mongo.db.project_topics.find({})
 	l=group1()
 	status=mongo.db.form_status.find_one({'_id':1})
-	return render_template('project.html',topics=topics,team=l,status=status['show_project_assign'])
+	email=session['email']
+	user=mongo.db.faculty.find_one({'email':email})
+	return render_template('project.html',user_fn=user['firstname'],user_ln=user['lastname'],topics=topics,team=l,status=status['show_project_assign'])
 
 
 @app.route('/logout_t')
@@ -533,12 +563,89 @@ def group1():
 			d={}
 			d['key']=team['_id']
 			d['value']=mongo.db.project_topics.find_one({'_id': team['project']})['topic']
+			d['guide']=mongo.db.project_topics.find_one({'_id': team['project']})['guide']
 			if str(team['_id']) in ev_team:
 				d['status']="evaluated"
 			else:
 				d["status"]="Yet To Be Evaluated"
 			l.append(d)
 	return l
+
+# helper function
+@app.route('/display_team_details/<team_id>')
+def display_team_details(team_id):
+	team=mongo.db.student_team.find_one({'_id':team_id})
+	s_i=team['students']
+	student=mongo.db.student
+	sl=[]
+	for i in s_i:
+		s=student.find_one({'_id':i})
+		sl.append({"fn":s['firstname'],"ln":s['lastname']})
+	assignment_topic= mongo.db.assignment_topics.find_one({'_id':team['assignment_topic']})['topic']
+	project_topic=mongo.db.project_topics.find_one({'_id': team['project']})['topic']
+	project_guide=mongo.db.project_topics.find_one({'_id': team['project']})['guide']
+	return render_template('view_team_details.html',id=team_id,names=sl,assignment=assignment_topic,project_topic=project_topic, project_guide=project_guide)
+
+@app.route('/display_team_details_assignment/<team_id>')
+def display_team_details_assignment(team_id):
+	team=mongo.db.student_team.find_one({'_id':team_id})
+	s_i=team['students']
+	student=mongo.db.student
+	sl=[]
+	for i in s_i:
+		s=student.find_one({'_id':i})
+		sl.append({"fn":s['firstname'],"ln":s['lastname']})
+	assignment_topic= mongo.db.assignment_topics.find_one({'_id':team['assignment_topic']})['topic']
+	return render_template('view_team_details_assignment.html',id=team_id,names=sl,assignment=assignment_topic)
+
+
+@app.route('/all_team_details')
+def all_teams():
+	teams=mongo.db.student_team.find({})
+	team_list=[]
+	i=1
+	for team in teams:
+		team_id=team['_id']
+		s_i=team['students']
+		student=mongo.db.student
+		sl=[]
+		sid=[]
+		for i in s_i:
+			s=student.find_one({'_id':i})
+			sid.append(i)
+			sl.append({"fn":s['firstname'],"ln":s['lastname']})
+		assignment_topic= mongo.db.assignment_topics.find_one({'_id':team['assignment_topic']})['topic']
+		team_list.append({"slno":i, "id":team_id, "size": len(sl) ,"srns":sid, "names":sl, "title":assignment_topic})
+	email=session['email']
+	user=mongo.db.faculty.find_one({'email':email})
+	return render_template('assignment_teams.html',user_fn=user['firstname'],user_ln=user['lastname'], details=team_list)
+
+
+
+@app.route('/selected_team_details')
+def selected_teams():
+	teams=mongo.db.student_team.find({})
+	team_list=[]
+	i=1
+	for team in teams:
+		if team['shortlisted']:
+			team_id=team['_id']
+			s_i=team['students']
+			student=mongo.db.student
+			sl=[]
+			sid=[]
+			for i in s_i:
+				s=student.find_one({'_id':i})
+				sid.append(i)
+				sl.append({"fn":s['firstname'],"ln":s['lastname']})
+			project_topic=mongo.db.project_topics.find_one({'_id': team['project']})['topic']
+			project_guide=mongo.db.project_topics.find_one({'_id': team['project']})['guide']
+			team_list.append({"slno":i, "id":team_id, "size": len(sl) ,"srns":sid, "names":sl, "title":project_topic,"guide":project_guide})
+	email=session['email']
+	user=mongo.db.faculty.find_one({'email':email})
+	return render_template('project_teams.html',user_fn=user['firstname'],user_ln=user['lastname'], details=team_list)
+
+
 
 
 
@@ -661,7 +768,7 @@ def enter_project_topics():
 		status=mongo.db.form_status.find_one({'_id':1})
 		number= status['curr_project_num']
 		for i in range(1,number+1):
-			mongo.db.project_topics.insert({'topic': request.form[str(i)]})
+			mongo.db.project_topics.insert({'topic': request.form[str(i)], 'guide': request.form[str(str(i)+'-teacher')]})
 		return redirect(url_for('admin_home'))
 	number=mongo.db.student_team.count_documents({'shortlisted':True})
 	status=mongo.db.form_status

@@ -34,18 +34,17 @@
     </head>
   <body>
     <div >
-      <h3 style="background-color: rgb(0,0,153); color:white; height: 60px"><center style="padding-top:10px">This is the evaluation summary of the team with id <I>{{id}}</I></center></h3>
+      <h3 style="background-color: rgb(0,0,153); color:white; height: 60px"><center style="padding-top:10px">Details of the team with ID <I>{{id}}</I></center></h3>
       <div style="padding-right: 20px">
         <a href="{{url_for('project')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:left; "><i class='fas fa-reply'></i> Back
             </a>
           </div>
     </div>
-    
     <div class = "container" style="padding-top: 100px">
       <table class="table table-bordered" style="border: 1px solid white;
-  border-collapse: collapse;">
-          <tbody style="border: 1px solid white;
-  border-collapse: collapse;">
+      border-collapse: collapse;">
+              <tbody style="border: 1px solid white;
+      border-collapse: collapse;">
             <tr>
               <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center>TEAM ID</center> </B></td>
               <td><center> <B style="color: white; font-size: 20px"> {{id}}</B></center></td>
@@ -54,7 +53,7 @@
             <tr>
               <td class="align-middle" style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px;"><center >NAMES</center></B> </td>
               <td>
-              {% for i in list_names %} 
+              {% for i in names %} 
               <center>
               <pre class="tab1"><B style="color: white; font-size: 20px">{{ (i.fn)[0]|upper}}{{(i.fn)[1:] }} {{i.ln}} </B></pre> 
               </center>
@@ -63,19 +62,19 @@
             </tr>
             
             <tr>
-              <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center> DEMO</center> </B></td>
-              <td><center><B style="color: white; font-size: 20px">{{demo}}</B></center></td>
+              <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center> CCBD Assignment Topic </center> </B></td>
+              <td><center><B style="color: white; font-size: 20px">{{assignment}}</B></center></td>
             </tr>
             <tr>
-              <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center>PPT</center> </B></td>
-              <td><center><B style="color: white; font-size: 20px">{{ppt}}</B></center></td>
+              <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center>CCBD Project Topic</center> </B></td>
+              <td><center><B style="color: white; font-size: 20px">{{project_topic}}</B></center></td>
             </tr>
             <tr>
-              <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center> REMARKS </center></B> </td>
-              <td><center><<B style="color: white; font-size: 20px"><I>{{remarks}}</I></B></center></td>
+              <td style="background-color:rgb(0,41,51);"><B style="color: white; font-size: 20px"><center> CCBD Project Guide  </center></B> </td>
+              <td><center><B style="color: white; font-size: 20px"><I>{{project_guide}}</I></B></center></td>
             </tr>
         </tbody>
       </table>
     </div>
-  </body>
+	</body>
 </html>

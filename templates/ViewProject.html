@@ -1,8 +1,17 @@
 {% extends "Layout.html" %}
 {% block content %}
 {%if status==true and select==true and project_view and shortlisted %}
-	<h2>Your Project Topic</h2>
-		<p>{{ topic }}</p>
+	<div style="padding-top: 50px;padding-left: 50px">
+		<table class="table table-bordered" style="width:50%">
+			<thead class="thead-dark">
+				<tr><th><h4 style="font-size: 30px"><center>Your Project Topic</center></h4></th></tr>
+			</thead>
+				<tr><td class="text-white" style="background-color: rgb(0, 34, 102)"><center><B>{{ topic }}</B></center></td></tr>
+			<thead class="thead-dark">
+				<tr><th><h4 style="font-size: 30px"><center>Your Project Guide</center></h4></th></tr>
+			</thead>
+				<tr><td class="text-white" style="background-color: rgb(0, 34, 102)"><center><B>{{guide}}</B></center></td></tr>
+		</table>
 	</div>
 {%endif%}
 {% endblock %}

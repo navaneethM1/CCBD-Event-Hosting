@@ -3,10 +3,12 @@
 {%if status==true and select== true%}
 	{% set i = namespace(value = 1) %}
 	{% for assignment in assignments %}
-		<div class=" jumbotron mb-5 bg-light" style="width: 80%;">
-			<h2 style="font-size: 2.8rem;">Topic {{ i.value }} : {{ assignment.topic }}</h1>
-			<hr>
-			<p class="lead" style="text-indent: 6rem; font-size: 1.6rem;">{{ assignment.desc }}</p>
+		<div class="mt-5 jumbotron  rounded-circle" style="width: 80%;background-color: rgb(26, 26, 26); padding: 80px;">
+			<center>
+				<h2 style="font-size:28px; color:white "><B><I>Topic {{ i.value }} : {{ assignment.topic }}</I></B></h2>
+				<hr>
+				<p class="lead" style="text-indent: 6rem; font-size: 1.6rem;color:white">{{ assignment.desc }}</p>
+			</center>
 		</div>
 		{% set i.value = i.value + 1 %}
 	{% endfor %}

@@ -16,24 +16,37 @@
 
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Euphoria+Script&family=Yellowtail&display=swap" rel="stylesheet">
+  <style>
+        body{
+          background-image: url("https://media.istockphoto.com/photos/cloud-computing-picture-id966932508?k=6&m=966932508&s=612x612&w=0&h=yPbacrsSWiuaQ0d7IZ6UFF8UA_NDKQSBYIrNE_qNDlY=");
+          background-repeat: no-repeat;
+        background-attachment: fixed;  
+        background-size: cover;
+        }
+        input:focus{
+          border-color: rgb(0,0,153);
+        }
+        
+      </style>
 </head>
 <body>
   <div class="row">
     <div class="col-12 col-sm-6 col-lg-4">
-      <div class="nav-side-menu">
-        <div class="brand container-fluid" style="float: left;">
+      <div class="nav-side-menu" style="background-color: rgb(0, 0, 77)">
+        <div class="brand container-fluid" style="float: left;background-color: rgb(0, 0, 153)">
           <a href="{{ url_for('home') }}"><i class="fa fa-home" aria-hidden="true" style="font-size: 3rem;"></i></a>
           Welcome, {{ Student.firstname.capitalize() }}!
         </div>
         <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>         
           <div class="menu-list" id="menu-content">
-            <div class="text-success">
-              <h3>Bootcamp</h3>
+            <div class="text-success" style="background-color: none">
+              <h3 style="color:white">Bootcamp</h3>
             </div>
-            <ul class="menu-content">
+            <ul class="menu-content"  >
               <li class="{% if request.url.split('/')[-1] == 'attendance' %}
                   active
-                {% endif %}">
+                {% endif %}" style="background-color:rgb(0, 0, 204)">
                 <a href="{{ url_for('attendance') }}" class="mx-3">
                   Attendance
                 </a>
@@ -41,14 +54,14 @@
             </ul>
             <br>
             {%if status==true and select==true%}
-            <div class="text-success">
-              <h3>Assignment</h3>
+            <div class="text-success" style="background-color: none">
+              <h3 style="color:white">Assignment</h3>
             </div>
             
             <ul class="menu-content">
               <li class="{% if request.url.split('/')[-1] == 'viewAssignments' %}
                   active
-                {% endif %}">
+                {% endif %}" style="background-color:rgb(0, 0, 204)">
                 
                 <a href="{{ url_for('viewAssignments') }}" class="mx-3">
                   Topics
@@ -57,20 +70,20 @@
               </li>
               <li class="{% if request.url.split('/')[-1] == 'teamForm' %}
                   active
-                {% endif %}">
+                {% endif %}" style="background-color:rgb(0, 0, 204)">
                 <a href="{{ url_for('teamForm') }}" class="mx-3">
                   Fill Form
                 </a>
               </li>
             </ul>
             <br>
-            <div class="text-success">
-              <h3>Your Team</h3>
+            <div class="text-success" style="background-color: none">
+              <h3 style="color:white">Your Team</h3>
             </div>
             <ul class="menu-content">
               <li class="{% if request.url.split('/')[-1] == 'teamInfo' %}
                   active
-                {% endif %}">
+                {% endif %}" style="background-color:rgb(0, 0, 204)">
                 <a href="{{ url_for('teamInfo') }}" class="mx-3">
                   Team Details
                 </a>
@@ -79,13 +92,13 @@
             
             <br>
             {% if show_assgn_shortlist_msg %}
-              <div class="text-success">
-                <h3>Assignment Results</h3>
+              <div class="text-success" style="background-color: none">
+                <h3 style="color:white">Assignment Results</h3>
               </div>
               <ul class="menu-content">
                 <li class="{% if request.url.split('/')[-1] == 'assgnResults' %}
                     active
-                  {% endif %}">
+                  {% endif %}" style="background-color:rgb(0, 0, 204)">
                   <a href="{{ url_for('assgnResults') }}" class="mx-3">
                     Results
                   </a>
@@ -93,13 +106,13 @@
               </ul>
             {% endif %}
             {% if project_view and shortlisted %}
-              <div class="text-success">
-                <h3>Project</h3>
+              <div class="text-success" style="background-color: none">
+                <h3 style="color:white">Project</h3>
               </div>
               <ul class="menu-content">
                 <li class="{% if request.url.split('/')[-1] == 'viewProject' %}
                     active
-                  {% endif %}">
+                  {% endif %}" style="background-color:rgb(0, 0, 204)">
                   <a href="{{ url_for('viewProject') }}" class="mx-3">
                     View Project
                   </a>
@@ -110,7 +123,7 @@
             <br>
             <br>
             <ul class="menu-content" style="float: right;">
-              <li>
+              <li >
                 <a href="{{ url_for('logout') }}" class="mx-3" style="border-bottom: none;">
                   Logout
                 </a>
