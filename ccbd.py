@@ -4,20 +4,26 @@ from flask_pymongo import PyMongo
 import bcrypt
 import os
 from werkzeug.utils import secure_filename
-# app setup
 
+
+# Static folder
 UPLOAD_FOLDER = os.getcwd() + '/static'
 ALLOWED_EXTENSIONS = {'jpg'}
 
+
+# app setup
 app = Flask(__name__)
 app.config['MONGO_DBNAME']='CCBD'
 app.config['MONGO_URI']='mongodb+srv://Rakshith:rakshith123@cluster0-u7vm7.gcp.mongodb.net/CCBD?retryWrites=true&w=majority'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 mongo = PyMongo(app)
 
+
 # helper function
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 
 #-----------------------------------------------------------------------------#
 #-------------------------------Index Page------------------------------------#
@@ -30,13 +36,17 @@ def allowed_file(filename):
 def index():
 	return render_template('index.html')
 
+
 @app.route('/about_ccbd')
 def ccbd_info():
 	return render_template('About.html')
 
+
 @app.route('/about_website')
 def website():
 	return render_template('website.html')
+
+
 
 #---------------------------------------------------------------------------------------------------#
 #-------------------------------Student and Teacher SignUp,Login------------------------------------#
@@ -528,50 +538,6 @@ def logout_t():
     return redirect(url_for('index'))
 
 
-# helper function
-def group():
-	topics=mongo.db.assignment_topics.find({})
-	t_e=mongo.db.student_team.find({})
-	ev_team=[]
-	for i in mongo.db.assignment_eval.find({}):
-		ev_team.append(i['_id'])
-
-	l=[]
-	for team in t_e:
-		d={}
-		d['key']=team['_id']
-		d['value']=mongo.db.assignment_topics.find_one({'_id': team['assignment_topic']})['topic']
-		if str(team['_id']) in ev_team:
-			d['status']="evaluated"
-		else:
-			d["status"]="Yet To Be Evaluated"
-		l.append(d)
-	return l
-
-
-# helper function
-def group1():
-	topics=mongo.db.project_topics.find({})
-	t_e=mongo.db.student_team.find({})
-	ev_team=[]
-	for i in mongo.db.project_eval.find({}):
-		ev_team.append(i['_id'])
-
-	l=[]
-	for team in t_e:
-		if team['shortlisted']:
-			d={}
-			d['key']=team['_id']
-			d['value']=mongo.db.project_topics.find_one({'_id': team['project']})['topic']
-			d['guide']=mongo.db.project_topics.find_one({'_id': team['project']})['guide']
-			if str(team['_id']) in ev_team:
-				d['status']="evaluated"
-			else:
-				d["status"]="Yet To Be Evaluated"
-			l.append(d)
-	return l
-
-# helper function
 @app.route('/display_team_details/<team_id>')
 def display_team_details(team_id):
 	team=mongo.db.student_team.find_one({'_id':team_id})
@@ -585,6 +551,7 @@ def display_team_details(team_id):
 	project_topic=mongo.db.project_topics.find_one({'_id': team['project']})['topic']
 	project_guide=mongo.db.project_topics.find_one({'_id': team['project']})['guide']
 	return render_template('view_team_details.html',id=team_id,names=sl,assignment=assignment_topic,project_topic=project_topic, project_guide=project_guide)
+
 
 @app.route('/display_team_details_assignment/<team_id>')
 def display_team_details_assignment(team_id):
@@ -646,6 +613,48 @@ def selected_teams():
 	return render_template('project_teams.html',user_fn=user['firstname'],user_ln=user['lastname'], details=team_list)
 
 
+# helper function
+def group():
+	topics=mongo.db.assignment_topics.find({})
+	t_e=mongo.db.student_team.find({})
+	ev_team=[]
+	for i in mongo.db.assignment_eval.find({}):
+		ev_team.append(i['_id'])
+
+	l=[]
+	for team in t_e:
+		d={}
+		d['key']=team['_id']
+		d['value']=mongo.db.assignment_topics.find_one({'_id': team['assignment_topic']})['topic']
+		if str(team['_id']) in ev_team:
+			d['status']="evaluated"
+		else:
+			d["status"]="Yet To Be Evaluated"
+		l.append(d)
+	return l
+
+
+# helper function
+def group1():
+	topics=mongo.db.project_topics.find({})
+	t_e=mongo.db.student_team.find({})
+	ev_team=[]
+	for i in mongo.db.project_eval.find({}):
+		ev_team.append(i['_id'])
+
+	l=[]
+	for team in t_e:
+		if team['shortlisted']:
+			d={}
+			d['key']=team['_id']
+			d['value']=mongo.db.project_topics.find_one({'_id': team['project']})['topic']
+			d['guide']=mongo.db.project_topics.find_one({'_id': team['project']})['guide']
+			if str(team['_id']) in ev_team:
+				d['status']="evaluated"
+			else:
+				d["status"]="Yet To Be Evaluated"
+			l.append(d)
+	return l
 
 
 
