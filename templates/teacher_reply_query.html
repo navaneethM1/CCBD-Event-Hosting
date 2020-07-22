@@ -1,0 +1,64 @@
+{% extends "teacher_layout.html" %}
+{% block content %}
+{%if status%}
+
+	<div class = "container">
+		<div class = "row">
+			<div class = "col" style="overflow: auto;">
+				{% for query in details %}
+				{% if query.answer != false%}
+				<div style="padding: 1%;">
+					<div class="border " style="border-radius: 5px;border-color: rgb(217, 217, 217);color:white; font-size: 140%;width:80%;word-wrap: break-word">
+
+						<B>Topic :</B> {{query.topic}}<br>
+						<B>Query :</B> {{query.query}}<br>
+						<B >Reply :</B><br> {{query.answer}}<br>
+						<B ><I style="padding-left: 48%">Replied on {{query.date}} at {{query.time}}</I></B>
+						
+					</div>
+				</div>
+			
+				{%endif%}
+				{%endfor%}
+			</div>
+			<div class = "col" style="border-radius: 5px;overflow: auto;">
+				{% for query in details %}
+				{% if query.answer == false%}
+				<div class = "border col mr-5 ml-3 mt-1" style="border-radius: 5px;">
+					<div style="border-radius: 5px;border-color: rgb(217, 217, 217);color:white; font-size: 140%;">
+						<B>Topic :</B> {{query.topic}}<br>
+						<B>Query :</B> {{query.query}}<br>
+						
+						<button type="button" class="btn btn-primary" style="font-size: 15px;margin-top: 10px;margin-bottom: 10px;float:right;" onclick="myFunction('{{query.query_id}}' )">Reply</button>
+						<form method = 'POST' action="#" id = "{{query.query_id}}" class = "collapse ">
+							<div class = "form-group">
+								<input type = "text" name = "id" value = "{{query.query_id}}" style = "display: none" readonly>
+							</div>	
+							<div class="form-group">
+						    
+						    <textarea class="form-control" rows="4" id="comment" name="reply" style="background-color:rgb(204, 230, 255);font-size:15px" placeholder="Your Reply"  required></textarea>
+						  	</div>
+						  	
+						  	<center><button type="submit" class="btn btn-primary" style="color:white;background-color: 
+						  	rgb(0,0,153);font-size:15px">Submit</button></center></br>
+						</form>
+					</div>
+				</div>
+				<br><br><br>
+				{%endif%}
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+	<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{%endif%}
+{%endblock%}

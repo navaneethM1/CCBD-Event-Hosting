@@ -1,52 +1,17 @@
-<!doctype html>
-<html lang="en">
-	<head>
-	  	<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
-	    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-	    <style>
-	    	body{
-	    		background-image: url("https://thumbs.dreamstime.com/b/cloud-technology-computing-big-data-concept-abstract-digital-background-wireframe-storage-sign-dark-blue-vector-illustration-138763569.jpg");
-	    		background-repeat: no-repeat;
-				background-attachment: fixed;  
-				background-size: cover;
-	    	}
-	    	#footer {
-	    	   position: fixed;
-			   left: 0;
-			   bottom: 0;
-			   width: 100%;
-			   text-align: center;
-	    	}
-	    </style>
-  	</head>
-	<body>
-		<div >
-			<h3 style="background-color: rgb(0,0,153); color:white; height: 60px"><center style="padding-top:10px"><img src="/static/{{img_name}}" class="rounded-circle" style="width:40px;height:40px;"> Welcome Prof. {{user_fn}} {{user_ln}}</center></h3>
-			<div style="padding-right: 20px">
-				<a href="{{url_for('logout_t')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:right; ">Log out <i class="fa fa-sign-out-alt" style="font-size:24px; padding-left: 4px"></i> 
-	        	</a>
-	        </div>
+{% extends "teacher_layout.html" %}
+{% block content %}
+		<div style="height: 100%; width: 80%">
+			<p style="color: white;font-size: 20px;padding-top:40px"><B><I>“A good teacher is like a candle, it consumes itself to light the way for others”.</I></B></p>
+			<p style="color: white;font-size: 20px;"><B><I>“A teacher affects eternity and can never tell where the influence stops.”</I></B></p>
+			<p style="color: white;font-size: 20px;padding-top:40px">
+				This Portal would enable you to get all the required details about bootcamp, teams, assignments, projects and student queries.
+			</p>
+			<p style="color: white;font-size: 20px;">
+				All the required details are readily available for all events. Along with this you would  enjoy clarifying the doubts of participants.
+			</p>
+			<p style="padding-top:40px">
+				<h1 style="color: white;">Hope to see you comfortable with the website :)</h1>  
+			</p>
 		</div>
-		<div class="container" style="height: 430px"> 
-			<br><br><br><br><br><br><br><br><br>
-			<div class="row">
-				<div class="col align-self-center">
-					<p style="color:white;font-size: 20px">1. <a href="{{url_for('bootcamp')}}"> Participant details for the bootcamp</a></p>
-					<p style="color:white;font-size: 20px">2. <a href="{{url_for('all_teams')}}"> Participating Teams</a></p>
-					<p style="color:white;font-size: 20px">3. <a href="{{url_for('assignment')}}">Assignments</a></p>
-					<p style="color:white;font-size: 20px">4. <a href="{{url_for('selected_teams')}}"> Project Teams</a></p>
-					<p style="color:white;font-size: 20px">5. <a href="{{url_for('project')}}"> Project</a></p>
-				</div>
-			</div>
-		</div>
-		<div id="footer" style="height: 150px; background-color: black">
-			<center style="padding-top:40px"><p style="color: white;font-size: 20px"><B><I>“A good teacher is like a candle, it consumes itself to light the way for others”.</I></B></p></center>
-			<center><p style="color: white;font-size: 20px"><B><I>“A teacher affects eternity and can never tell where the influence stops.”</I></B></p></center>
-		</div>
-	</body>
-</html>
+	
+{% endblock %}

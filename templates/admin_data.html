@@ -1,0 +1,12 @@
+{% extends "admin_layout.html" %}
+{% block content %}<br><br>
+<div class="container">
+	<a type="button" class="btn btn-outline-primary btn btn-link btn-lg btn-block" href="{{url_for('topics_assignment')}}" style="color:rgb(217, 217, 217)">Assignment Topics</a>
+	<a type="button"  class="btn btn-outline-primary btn btn-link btn-lg btn-block"   href="/criteria" style="color:rgb(217, 217, 217)"> Shortlisting Criteria Based On Assignment</a>
+	<a type="button"  class="btn btn-outline-primary btn btn-link btn-lg btn-block"   href="/enter_project_topics" style="color:rgb(217, 217, 217)">Project Topics</a>
+	<a type="button"  class="btn btn-outline-primary btn btn-link btn-lg btn-block"   href="/assign_project" style="color:rgb(217, 217, 217)">Assign Project Topics To Students</a>
+	<a type="button"  class="btn btn-outline-primary btn btn-link btn-lg btn-block"   href="/confirming_project" style="color:rgb(217, 217, 217)">Confirming Internship</a>
+	<br><br><br><br><br><br><br><br><br>
+</div>
+	  	
+{%endblock%}

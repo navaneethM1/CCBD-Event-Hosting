@@ -1,54 +1,38 @@
 {% extends "Layout.html" %}
 {% block content %}
 {%if status==true and select==true%}
-	<h2 class="text-white bg-dark" style="width: 60%"><center>Your Team</center></h2>
-	<div>
-		<table class="table table-bordered" style="width: 60%">
+	<div class="container" style="margin-top: 10%;">
+		{% with message = get_flashed_messages()[0] %}
+		  {% if message %}
+		  	<div class="alert alert-font success mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% endif %}
+		{% endwith %}
+		<span class="mr-3"><span class="font-mini regular1 mr-2">Topic:</span> <span class="font-imp">{{ topic }}</span></span>
+		<span class="ml-3"><span class="font-mini regular1 mr-2">Team Name:</span> <span class="font-imp">{{ team_name }}</span></span>
+		<br>
+		<br>
+		<br>
+		<div>
 			{% for student in students_info %}
-				<thead class="thead-dark">
-					<tr>
-						<th colspan="2"><center>
-							{{ student.firstname.capitalize() + ' ' + student.lastname.capitalize() }}</center>
-						</th>
-					</tr>
-				</thead>
-				<tr>
-					<td class="text-white bg-dark">
-						Department
-					</td>
-					<td  class="text-white" style="background-color: rgb(0, 34, 102)"><B>
-						{{ student.department }}</B>
-					</td>
-				</tr>
-				<tr>
-					<td class="text-white bg-dark">
-						Email
-					</td>
-					<td  class="text-white" style="background-color: rgb(0, 34, 102)"><B>
-						{{ student.email }}</B>
-					</td>
-				</tr>
-				<tr>
-					<td class="text-white bg-dark">
-						Phone
-					</td>
-					<td class="text-white" style="background-color: rgb(0, 34, 102)"><B>
-						{{ student.contactnumber }}</B>
-					</td>
-				</tr>
-				<br>
+				<div class="student">
+					<div class="student_name bold1">{{ student.firstname.capitalize() + ' ' + student.lastname.capitalize() }}</div>
+					<br>
+					<div class="student_info regular1"><i class="fa fa-envelope-o mr-2" aria-hidden="true"></i>{{ student.email }}</div>
+					<div class="student_info regular1"><i class="fa fa-phone mr-2" aria-hidden="true"></i>{{ student.contactnumber }}</div>
+					<div class="student_info regular1"><i class="fa fa-building-o mr-2" aria-hidden="true"></i>{{ student.department }}</div>
+				</div>
 			{% endfor %}
-		</table>
+		</div>
 	</div>
-	<br>
-	<div>
-		<table class="table table-bordered" style="width:60%">
-			<thead class="thead-dark">
-				<tr><th >Your Assignment Topic</th></tr>
-			</thead>
-				<tr><td class="text-white" style="background-color: rgb(0, 34, 102)">{{ topic }}</td></tr>
-			
-		</table>
+{%elif status==true and select==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">You did not attend on all the 3 days of Bootcamp<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+	</div>
+{%elif status==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">Assignments are not released still</p>
 	</div>
 {%endif%}
 {% endblock %}

@@ -28,6 +28,13 @@
             function mouseout3() { 
                 document.getElementById("gfg3").style.color = "rgb(244,239,255)"; 
             }
+            function mouseover4() { 
+                document.getElementById("gfg4").style.color = "rgb(24, 0, 77)"; 
+            } 
+              
+            function mouseout4() { 
+                document.getElementById("gfg4").style.color = "rgb(244,239,255)"; 
+            }
     </script> 
     <style>
     	img {
@@ -47,23 +54,28 @@
 		    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
 		        <ul class="navbar-nav ">		            
 		            <li class="nav-item ">
+                    <div class="nav-link" href="" style="color: rgb(244,239,255);"><strong><em>CCBD Internship Portal</em></strong></div>
+                </li>
+                <li class="nav-item ">
 		                <a class="nav-link" href="{{url_for('ccbd_info')}}" style="color: rgb(244,239,255);" id="gfg1" onmouseover="mouseover1()" onmouseout="mouseout1()">More About CCBD</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{url_for('website')}}" style="color: rgb(244,239,255);" id="gfg4" onmouseover="mouseover4()" onmouseout="mouseout4()">Know About Our Website</a>
 		            </li>
 		        </ul>
 		    </div>
 		    <div class="mx-auto order-0" >
           <div class="row">
             <div class="col">
-            <img src= "/static/pes_logo.png" alt="" style="width:50px">
-          </div>
-          <div class="col">
-  		      <img src= "/static/logo.png" alt="" >
-          </div>
+              <a href="https://www.pes.edu/"><img src= "/static/pes_logo.png" alt="" style="width:50px"></a>
+            </div>
+            <div class="col">
+    		      <a href="https://research.pes.edu/cloud-computing-big-data/"><img src= "/static/logo.png" alt="" ></a>
+            </div>
           </div>
 		    </div>
 		    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 		        <ul class="navbar-nav ml-auto">
-		        	<i class='fas fa-home' style='font-size:30px'></i>
 		            <li class="nav-item" >
 		                <a class="nav-link " href="{{url_for('studentLogin')}}" style="color: rgb(244,239,255);" id="gfg2" onmouseover="mouseover2()" onmouseout="mouseout2()">Student Home</a>
 		            </li>
@@ -82,7 +94,6 @@
   		<h1 style="color:white;"><center><b>Cloud Computing And Big Data</b></center></h1>
   		<center style="color:white;font-size: 24px;padding-top:50px">Enjoy the Luxury of Learning on Cloud By Joining CCBD</center>
   		<center style="color:white;font-size: 24px;padding-top:20px">Become a Catalyst for Building of Open Source Communities </center>
-  		<center style="padding-top:20px"><a type="button" class="btn btn-primary" href="{{url_for('website')}}" style="color:rgb(244,239,255">Know About Our Website</a></center>
       <br>
       <br>
       <br>

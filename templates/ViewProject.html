@@ -1,17 +1,65 @@
 {% extends "Layout.html" %}
 {% block content %}
-{%if status==true and select==true and project_view and shortlisted %}
-	<div style="padding-top: 50px;padding-left: 50px">
-		<table class="table table-bordered" style="width:50%">
-			<thead class="thead-dark">
-				<tr><th><h4 style="font-size: 30px"><center>Your Project Topic</center></h4></th></tr>
-			</thead>
-				<tr><td class="text-white" style="background-color: rgb(0, 34, 102)"><center><B>{{ topic }}</B></center></td></tr>
-			<thead class="thead-dark">
-				<tr><th><h4 style="font-size: 30px"><center>Your Project Guide</center></h4></th></tr>
-			</thead>
-				<tr><td class="text-white" style="background-color: rgb(0, 34, 102)"><center><B>{{guide}}</B></center></td></tr>
-		</table>
+{% if status==true and select==true and project_view and not shortlisted %}
+	<div class="container" style="margin-top: 10%;">
+		<p class="shortlisted-message regular1">We are sorry to inform that your team has not been shortlisted. Hope you had a good experience</p>
+	</div>
+{% elif status==true and select==true and project_view and shortlisted %}
+	<div class="container" style="margin-top: 10%;">
+		{% with message = get_flashed_messages()[0] %}
+		  {% if message %}
+		  	<div class="alert alert-font success mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% endif %}
+		{% endwith %}
+		<h3 class="bold1" id="congrats">Congratulations!</h3>
+		<p class="shortlisted-message regular1">Your Team {{ team_name }} has been shortlisted for a 6-week internship!</p>
+		<br>
+		<div class="project-details row">
+			<div class="lhs regular1 col-3">
+				<div>Project:</div>
+				<div>Guide:</div>
+				<div>Contact:</div>
+			</div>
+			<div class="rhs regular1">
+				<div>{{ topic }}</div>
+				<div>{{ guide.firstname.title() + " " + guide.lastname.title() }}</div>
+				<div>{{ guide.contactnumber }}</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div style="width: 50%;">
+			{% if extra == '1' or extra == '0' %}
+				{% if extra == '0' and over %}
+					<p class="shortlisted-message regular1" style="margin-top: 1rem; margin-bottom: 4%;">As you did not confirm your availability, we are sorry to tell you that you cannot continue with the internship. Hope you had a good experience.</p>
+				{% elif extra == '0' %}
+					<p class="shortlisted-message regular1" style="margin-top: 1rem; margin-bottom: 4%;">We are sorry to hear that. Hope you had a good experience.</p>
+				{% endif %}
+			{% else %}
+				<p class="shortlisted-message regular1" style="margin-top: 1rem; margin-bottom: 4%;">We are thrilled to have you onboard! If you would like to take up this internship, please confirm by letting us know your availability<span style="color: #EC5E69">*</span></p>
+				<form method="POST" action="">
+					<button type="submit" value="no" name="accept" class="link bold mr-3" id="no" style="float: left; margin-bottom: 2%; border: none; padding: 2.5%; background-color: #EC5E69;">No, I am not available</button>
+					<button type="submit" value="yes" name="accept" class="link bold ml-3" id="yes" style="float: left; margin-bottom: 2%; border: none; padding: 2.5%;">Yes, I am available</button>
+				</form>
+				<br>
+				<br>
+				<p class="shortlisted-message regular1" id="know-your-availability" style="float: left;"><span style="color: #EC5E69">*</span>Please let us know your availability by {{ date }}/{{ month }}</p>
+			{% endif %}
+		</div>
+	</div>
+{%elif status==true and select==true and project_view==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">Assignments Results are not released still</p>
+	</div>
+{%elif status==true and select==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">You did not attend on all the 3 days of Bootcamp<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+	</div>
+{%elif status==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">Assignments are not released still</p>
 	</div>
 {%endif%}
 {% endblock %}

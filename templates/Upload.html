@@ -1,0 +1,76 @@
+{% extends "Layout.html" %}
+{% block content %}
+{%if status==true and select==true and crossed and link_time%}
+	<div class="container" style="margin-top: 10%;">
+		<div style="width: 50%;">
+			<form method="POST" action="">
+			  <div>
+			  	<div class="form-group">
+			    	<label class="regular1" for="upload">Assignment Link</label>
+			    	<input name="submission_link" type="text" class="form-control shadow-none" id="upload" required autocomplete="off">
+			  	</div>
+			  <button type="submit" class="link bold" style="float: left; border: none; padding: 2.5%; margin-bottom: 2%; cursor: not-allowed;" disabled>Submit</button>
+			  </div>
+			</form>
+		</div>
+		<br>
+		<br>
+		<br>
+		<p class="upload-expired regular1">Thank you for your submission!<i class="ml-2 fa fa-smile-o" aria-hidden="true"></i></p>
+		<p class="upload-expired regular1">We have considered your submission updated {{ link_time }}</p>
+	</div>
+{% elif status==true and select==true and crossed %}
+	<div class="container" style="margin-top: 10%;">
+		<div style="width: 50%;">
+			<form method="POST" action="">
+			  <div>
+			  	<div class="form-group">
+			    	<label class="regular1" for="upload">Assignment Link</label>
+			    	<input name="submission_link" type="text" class="form-control shadow-none" id="upload" required autocomplete="off">
+			  	</div>
+			  <button type="submit" class="link bold" style="float: left; border: none; padding: 2.5%; margin-bottom: 2%; cursor: not-allowed;" disabled>Submit</button>
+			  </div>
+			</form>
+		</div>
+		<br>
+		<br>
+		<br>
+		<p class="upload-expired regular1">Assignment Submission time has expired<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+	</div>
+{%elif status==true and select==true%}
+	<div class="container" style="margin-top: 10%;">
+		{% with message = get_flashed_messages()[0] %}
+		  {% if message %}
+		  	<div class="alert alert-font success mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% endif %}
+		{% endwith %}
+		<div style="width: 50%;">
+			<form method="POST" action="">
+			  <div>
+			  	<div class="form-group">
+			    	<label class="regular1" for="upload">Assignment Link</label>
+			    	<input name="submission_link" type="text" class="form-control shadow-none" id="upload" required autocomplete="off">
+			  	</div>
+			  <button type="submit" class="link bold" style="float: left; border: none; padding: 2.5%; margin-bottom: 2%;">Submit</button>
+			  </div>
+			</form>
+		</div>
+		{% if link_time %}
+			<br>
+			<br>
+			<br>
+			<p class="last-updated regular1">Last updated {{ link_time }}</p>
+		{% endif %}
+	</div>
+{%elif status==true and select==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">You did not attend on all the 3 days of Bootcamp<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+	</div>
+{%elif status==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">Assignments are not released still</p>
+	</div>
+{%endif%}
+{% endblock %}

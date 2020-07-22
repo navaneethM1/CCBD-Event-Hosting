@@ -1,45 +1,37 @@
-<!doctype html>
-<html lang="en">
-  	<head>
-	  	<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-  	</head>
-  	<body>
+{% extends "admin_layout.html" %}
+{% block content %}<br><br>
 	  	<div class="container ">
-	  		<h1 ><center>Topics For The Assignment </center></h1>
+	  		<h1 ><center style="color:rgb(51, 153, 255);font-family: 'Mukta', sans-serif;">Topics For The Assignment </center></h1>
 	  	</div>
 	  	<div class="row justify-content-center">
-	  		<div class="col-4 align-self-center">
+	  		<div class="col-7 align-self-center">
 			  	<form method = 'POST' action="#">
 			  		<div class="form-group">
-					    <label for="exampleInputName1">Topic-1</label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="topic1" >
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-1</B></label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="topic1" style="background-color:rgb(204, 230, 255);font-size: 15px" required>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="exampleInputName1">Topic-1 description</label>
-					    <textarea class="form-control" rows="4" id="comment" name="topic1-d"></textarea>
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-1 description</B></label>
+					    <textarea class="form-control" rows="4" id="comment" name="topic1-d" style="background-color:rgb(204, 230, 255);font-size: 15px" required></textarea>
 				  	</div>
 			  		<div class="form-group">
-					    <label for="exampleInputName1">Topic-2</label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="topic2" >
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-2</B></label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="topic2" style="background-color:rgb(204, 230, 255);font-size: 15px" required>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="exampleInputName1">Topic-2 description</label>
-					    <textarea class="form-control" rows="4" id="comment" name="topic2-d"></textarea>
+					    <label for="exampleInputName1"style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-2 description</B></label>
+					    <textarea class="form-control" rows="4" id="comment" name="topic2-d" style="background-color:rgb(204, 230, 255);font-size: 15px" required></textarea>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="exampleInputName1">Topic-3</label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="topic3" >
+					    <label for="exampleInputName1"style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-3</B></label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="topic3" style="background-color:rgb(204, 230, 255);font-size: 15px" required>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="exampleInputName1">Topic-3 description</label>
-					    <textarea class="form-control" rows="4" id="comment" name="topic3-d"></textarea>
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-3 description</B></label>
+					    <textarea class="form-control" rows="4" id="comment" name="topic3-d" style="background-color:rgb(204, 230, 255);font-size: 15px" required></textarea>
 				  	</div>
 				  	<button type="submit" class="btn btn-primary">Submit</button></br>
 				</form>
 			</div>
 		</div>
-  	</body>
-</html>
+		{%endblock%}

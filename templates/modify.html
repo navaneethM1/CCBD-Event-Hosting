@@ -1,0 +1,8 @@
+{% extends "admin_layout.html" %}
+{% block content %}<br><br>
+
+<a type="button" class="btn btn-outline-primary btn btn-link btn-lg btn-block" href="{{url_for('modify_student_srn')}}">modify student details</a>
+<a type="button" class="btn btn-outline-primary btn btn-link btn-lg btn-block" href="{{url_for('faculty_email')}}">modify faculty details</a>
+<a type="button" class="btn btn-outline-primary btn btn-link btn-lg btn-block" href="{{url_for('faculty_password')}}">modify faculty password</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{%endblock%}

@@ -1,0 +1,18 @@
+{% extends "Layout.html" %}
+{% block content %}
+	<div class="container"  style="margin-top: 10%;">
+		<div id="about-div">
+		<h3 class="about-header bold1">Greetings from Team CCBD! </h3>
+		<br>
+		<p class="about regular1">
+			Welcome aboard, {{ Student.firstname.capitalize() }}! You will have an exciting 3-day Bootcamp on the basics of big data. We hope you will find it enriching. On successful completion of the Bootcamp, you will be given a group assignment which will help further hone your skills. You can choose a topic and form a team to work on the given assignment. If your team is shortlisted, you and your team members get an oppurtunity to be a part of 6 week internship program offered by the CCBD Club.
+			<br>
+		</p>
+		<p class="about regular1">
+			We are excited to have you, and wish you the very best! 
+		</p>
+		<!-- Hello {{ Student.firstname.capitalize() }}, Bootcamp is an event where students get a very generic exposure to processing big data and also on the usage of cloud. This event will happen in two batches. The batches are made due to the huge participating number. For each batch, the event will go on for three days. This event will give an exposure to shell commands, Hadoop and other related topics to Cloud Computing. An ova file will be given which upon running in the virtual box, can be used for parallel practice and experience by the students. For each of the three days, separate ova files will be given. Experts from the CCBD faculty will give lectures on the various topics of Cloud Computing following which there will be an exercise session where the students would be asked to run few of the programs mentioned during the event. -->
+		<!-- Please attend <span class="highlighted">all the three days</span> in order to be part of the exciting events planned ahead for you! Topics for the assignments will be posted on the same site within a few days. You are expected to form teams of 2-4 and pick one of the topics. Upon submission of the assignment, your team is expected to give a demonstration on the topic you have chosen. Based on your team's performance, your team will be shortlisted for an amazing 6 week intership program offered by the CCBD Club. We wish you the very best and hope to see you soon in the Bootcamp event! -->
+	</div>
+</div>
+{% endblock %}

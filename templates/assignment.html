@@ -1,36 +1,6 @@
-<!doctype html>
-<html lang="en">
-	<head>
-	  	<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
-	    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-	    <style>
-	    	body{
-	    		background-image: url("/static/assignment_cloud.jpeg");
-	    		background-repeat: no-repeat;
-				background-attachment: fixed;  
-				background-size: cover;
-	    	}
-	    </style>
-  	</head>
-	<body>
-		<div >
-			<h3 style="background-color: rgb(0,0,153); color:white; height: 60px"><center style="padding-top:10px">Prof. {{user_fn}} {{user_ln}} - Student Assignment Details And Evaluation  </center></h3>
-			<div style="padding-right: 20px">
-				<a href="{{url_for('teacher_home')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:left; "><i class='fas fa-reply'></i> Back
-	        	</a>
-				<a href="{{url_for('logout_t')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:right; ">Log out<i class="fa fa-sign-out-alt" style="font-size:24px; padding-left: 4px"></i> 
-	        	</a>
-	        </div>
-		</div>
+{% extends "teacher_layout.html" %}
+{% block content %}
+    {% if status %}
 		<center>
 		{%if status%}
 		{% with message = get_flashed_messages()[0] %}
@@ -42,55 +12,58 @@
 		  	{% endif %}
 		{% endwith %}
 		</center>
+		
 		<div class="container" style="padding-top:100px">
+
 			<div class="row">
-				<div class="col-6" style="padding-right: 60px;float:left;">
-					<center>		
-						<div class="container" id="1" >
-							<table class="table table-striped table-bordered" style="width:500px"> 
-								<thead class="thead-dark">
-								    <tr>
-								      	<th scope="col" colspan="2"><h4><center>Team Details The Assignment</center></h4></th>
-								      	
-								    </tr>
-								    <tr>
-								    	<th scope="col"><center>Team Id</center></th>
-								      	<th scope="col"><center>Topic</center></th>
-									</tr>
-				  				</thead>
-				  				<tbody>
-								{% for t in team %}
-								<tr>
-									<td ><center><h6><a style="color:white;" href="/display_team_details_assignment/{{t.key}}"><B style="color:white">{{t.key}}</B></a></h5></center>
-						      		</td>
-							      	<td><center><B style="color:white">{{t.value}}</B></center></td>
-						    	</tr>
-								{% endfor %}
-								</tbody>
-							</table>
-						</div>
-					</center>
-				</div>
-				<div class="col-6" style="padding-left: 120px ;float:right;">
+				
+				<div class="col" style="float:right;">
 					
-						<table class="table table-striped table-bordered"> 
-							<thead class="thead-dark">
-								<tr><th colspan="2"><center><h4> Evaluation of the CCBD Assignment </h4></center></th></tr>
+						<table class="table table-bordered"> 
+							<thead class="text-white" style="background-color: rgb(77, 77, 255)">
+								<tr><th colspan="5"><center><h3>Team Details For CCBD Assignment </h3></center></th></tr>
 							    <tr>
-							      	<th scope="col"><center><B>Team_name</B></center></th>
-							      	<th scope="col"><center><B>Evaluation Status</B></center></th>
+							      	<th scope="col"><center><B style="font-size: 20px">Team Name</B></center></th>
+							      	<th scope="col"><center><B style="font-size: 20px">Team's Topic</B></center></th>
+							      	<th scope="col"><center><B style="font-size: 20px">Team Details</B></center></th>
+							      	<th scope="col"><center><B style="font-size: 20px">Assignment</B></center></th>
+							      	<th scope="col"><center><B style="font-size: 20px">Evaluation Status</B></center></th>
 							    </tr>
 			  				</thead>
 			  				<tbody>
+
 							{% for q in team %}
+							
 							<tr>
 								
-						      	<td ><center><h6><a style="color:white;" href="/my_func/{{q.key}}"><B style="color:white">{{q.key}}</B></a></h5></center>
+						      	<td ><center><h6><B style="color:white;font-size: 15px">{{q.key}}</B></h5></center>
 						      	</td>
+						      	<td><center><B style="color:white;font-size: 15px">{{q.value}}</B></center></td>
+						      	<td><a href="#" data-toggle="tooltip" data-placement="top" data-html="true" title="
+
+						      		<p>
+							      		<b><I>{{q.key}}</I></b><br>
+							      		<b>Names</b>:<br>
+							      		{% for i in q.name_list %} 
+							              
+							              {{ (i.fn)[0]|upper}}{{(i.fn)[1:] }} {{i.ln}} <br>
+							              
+							             {%endfor%}<br>
+							             <b>Assignment topic:</b><br>
+							              {{q.value}}
+							        </p>
+						      		" style="color: white;font-size: 15px"><center>
+
+						      		<B style="color:white">Know the team details</B></center></a></td>
+						      		{%if q.link != "no" %}
+						      		<td><center><B style="color:white;font-size: 15px"><a href="{{q.link}}" target="_blank" style="color:white;">view assignment</a></B></center></td>
+						      		{%else%}
+						      		<td><center><B style="color:white;font-size: 15px">Yet To Submit</B></center></td>
+						      		{%endif%}
 						      	{%if q.status=="evaluated"%}
-						      	<td><center><i class="fa fa-check-circle" aria-hidden="true" style="font-size:22px;color:rgb(0,204,255)"></i></center></td>
+						      	<td><center style="word-spacing: 10px"><i class="fa fa-check-circle" aria-hidden="true" style="font-size:20px;color:rgb(0,204,255)"></i> <a style="color:white;font-size: 15px" href="/summary_assignment/{{q.key}}"><B> Summary</B></a></center></td>
 						      	{%elif q.status=="Yet To Be Evaluated" %}
-						      	<td><B style="color:white"><center><I>Yet To Evaluate</I></center></B></td>
+						      	<td><B style="color:white;font-size: 15px"><center><I><a style="color:white;" href="/my_func/{{q.key}}">click to evaluate</a></I></center></B></td>
 						      	{%endif%}
 					    	</tr>
 							{% endfor %}
@@ -101,5 +74,9 @@
 			</div>
 		</div>
 		{%endif%}
-	</body>
-</html>
+		<script>$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+		</script>
+		{%endif%}
+	{%endblock%}

@@ -1,44 +1,27 @@
-<!doctype html>
-<html lang="en">
-  	<head>
-	  	<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-  	</head>
-  	<body>
+{% extends "admin_layout.html" %}
+{% block content %}<br><br>
 	  	<div class="container ">
-	  		<h1 ><center>Topics For The Project</center></h1>
+	  		<h1 ><center style="color:rgb(51, 153, 255);font-family: 'Mukta', sans-serif;">Topics For The Project</center></h1>
 	  	</div>
 	  	<div class="row justify-content-center">
 	  		<div class="col-4 align-self-center">
 			  	<form method = 'POST' action="#">
 			  		{% for i in range(1,number+1) %}
 			  		<div class="form-group">
-					    <label for="exampleInputName1">Topic-{{i}}</label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="{{i}}" >
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Topic-{{i}}</B></label>
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="{{i}}" style="background-color:rgb(204, 230, 255);font-size: 15px" required>
 				  	</div>
-				  	<select name="{{i}}-teacher" class="custom-select" placeholder="Please Enter The Guide Name">
-					    	<option selected>Please Enter The Guide Name</option>
-						    <option value="Dr KVS">Dr KVS</option>
-						    <option value="Dr Sidhu">Dr Sidhu</option>
-						    <option value=" Dr Dinkar"> Dr Dinkar</option>
-						    <option value="Prof Ananth">Prof Ananth</option>
-						    <option value="Prof Prafullata">Prof Prafullata</option>
-						    <option value=" Prof Spurthi"> Prof Spurthi</option>
-						    <option value=" Prof Usha"> Prof Usha</option>
-						    <option value=" Prof Spurthi"> Prof Spurthi</option>
-						    <option value=" Prof Usha"> Prof Usha</option>
-						    <option value="  Prof Phalachandra">  Prof Phalachandra</option>
-						    <option value=" Prof Rachana B S"> Prof Rachana B S</option>
-						    <option value=" Prof Pushpa"> Prof Pushpa</option>
-						    <option value="Meghana">Meghana</option>						    
-						    <option value=" Savitha"> Savitha</option>
-  						</select>
+				  	<select name="{{i}}-teacher" class="custom-select" placeholder="Please Enter The Guide Name" style="background-color:rgb(204, 230, 255);font-size: 15px" required>
+					    <option selected>Please Enter The Guide Name</option>
+					   	{%for i in faculty%}
+					    	<option value="{{ (i.key1)[0]|upper}}{{(i.key1)[1:] }} {{i.key2}}">{{ (i.key1)[0]|upper}}{{(i.key1)[1:] }} {{i.key2}}</option>
+						{%endfor%}
+  					</select>
 				  	{%endfor%}
+				  	<br><br>
 				  	<button type="submit" class="btn btn-primary">Submit</button></br>
 				</form>
 			</div>
 		</div>
-  	</body>
-</html>
+		<br><br><br><br><br>
+		{%endblock%}

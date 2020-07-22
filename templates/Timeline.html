@@ -1,0 +1,142 @@
+{% extends "Layout.html" %}
+{% block content %}
+	<div class="container" style="margin-top: 10%;">
+		<div class="box">
+	        <ul id="first-list">
+	            <li class="regular1">
+	                <span class="not-over"></span>
+	                <div class="info">Assignment Topics are announced</div>
+	                <div class="time">
+	                    <span id="month">
+	                    	<B id="date">
+	                    		{{ one_date }}
+	                    	</B>
+	                    	<br>
+	                    	{{ one_month }}
+	                    </span>
+	                    <span></span>
+	                </div>
+	            </li>
+	            <li class="regular1">
+	                <span class="not-over"></span>
+	                <div class="info">
+	                	{% if team_date %}
+	                		Team Formation completed
+	                	{% else %}
+	                		Last date for Team Formation
+	                	{% endif %}
+	                </div>
+	                <div class="time">
+	                    <span id="month">
+	                    	<B id="date">
+	                    		{% if team_date %}
+	                    			{{ team_date }}
+	                    		{% else %}
+	                    			{{ two_date }}
+	                    		{% endif %}
+	                    	</B>
+	                    	<br>
+	                    	{% if team_month %}
+	                    		{{ team_month }}
+	                    	{% else %}
+	                    		{{ two_month }}
+	                    	{% endif %}
+	                    </span>
+	                    <span></span>
+	                </div>
+	            </li>
+	            <li class="regular1">
+	                <span class="not-over"></span>
+	                <div class="info">
+	                	{% if link_date %}
+	                		Assignment Submission recorded
+	                	{% else %}
+	                		Assignment Submission begins
+	                	{% endif %}
+	                </div>
+	                <div class="time">
+	                    <span id="month">
+	                    	<B id="date">
+	                    		{% if link_date %}
+	                    			{{ link_date }}
+	                    		{% else %}
+	                    			{{ three_date }}
+	                    		{% endif %}
+	                    	</B>
+	                    	<br>
+	                    	{% if link_month %}
+	                    		{{ link_month }}
+	                    	{% else %}
+	                    		{{ three_month }}
+	                    	{% endif %}
+	                    </span>
+	                    <span></span>
+	                </div>
+	            </li>
+	            <li class="regular1">
+	                <span class="not-over"></span>
+	                <div class="info">Last date for Assignment {% if link_date %}Updation{% else %}Submission{% endif %}</div>
+	                <div class="time">
+	                    <span id="month">
+	                    	<B id="date">
+	                    		{{ four_date }}
+	                    	</B>
+	                    	<br>
+	                    	{{ four_month }}
+	                    </span>
+	                    <span></span>
+	                </div>
+	            </li>
+	            <li class="regular1">
+	                <span class="not-over"></span>
+	                <div class="info">Results are announced</div>
+	                <div class="time">
+	                    <span id="month">
+	                    	<B id="date">
+	                    		{{ five_date }}
+	                    	</B>
+	                    	<br>
+	                    	{{ five_month }}
+	                    </span>
+	                    <span></span>
+	                </div>
+	            </li>
+	            <li class="regular1">
+	                <span class="not-over"></span>
+	                <div class="info">
+	                	{% if accepted_date %}
+	                		{% if is_accepted %}
+	                			Project Week begins
+	                		{% else %}
+	                			Sorry to hear you discontinue
+	                		{% endif %}
+	                	{% else %}
+	                		Last date to confirm Availability
+	                	{% endif %}
+	                </div>
+	                <div class="time">
+	                    <span id="month">
+	                    	<B id="date">
+	                    		{% if accepted_date %}
+	                    			{{ accepted_date }}
+			                	{% else %}
+			                		{{ six_date }}
+			                	{% endif %}
+	                    	</B>
+	                    	<br>
+	                    	{% if accepted_month %}
+	                    		{{ accepted_month }}
+		                	{% else %}
+		                		{{ six_month }}
+		                	{% endif %}
+	                    </span>
+	                    <span></span>
+	                </div>
+	            </li>
+	        </ul>
+		</div>
+		<br>
+		<p class="timeline-message regular1" id="timeline" style="float: left;"><span style="color: #EC5E69;">**</span>This timeline gets dynamically reflected based on completing the events before the deadlines!</p>
+	</div>
+	<br>
+{% endblock %}

@@ -1,107 +1,117 @@
 {% extends "Layout.html" %}
 {% block content %}
 {%if status==true and select==true%}
-	{% with message = get_flashed_messages()[0] %}
-	  {% if message == 'Team Registration Unsuccessful. Incorrect SRN or Email' %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  {{ message }}
-		</div>
-	  {% elif message == 'You should be one of the team members!' %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  {{ message }}
-		</div>
-	  {% elif message == 'Please form a team and fill in the Team Details' %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  {{ message }}
-		</div>
-	  {% elif message == 'You did not pick a topic' %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  {{ message }}
-		</div>
-	  {% elif message == 'One of the students has not attended Bootcamp on all the 3 days' %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  {{ message }}
-		</div>
-	  {% elif message %}
-	  	<div class="alert alert-danger mt-3" role="alert" style="width: 50%;">
-		  {{ message }}
-		</div>
-	  {% endif %}
-	{% endwith %}
-	<div style="width: 50%; ">
-		<form method="POST" action="#">
-		  <div>
-		  	
-			  	<h2 style="margin-bottom: 3%;color:rgb(0,0,153)"><B>Team Member 1*</B></h2>
+	<div class="container" style="margin-top: 10%;">
+		{% with message = get_flashed_messages()[0] %}
+		  {% if message == 'Team Registration Unsuccessful. Incorrect SRN or Email' %}
+		  	<div class="alert alert-font warning mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% elif message == 'You should be one of the team members!' %}
+		  	<div class="alert alert-font warning mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% elif message == 'Please form a team and fill in the Team Details' %}
+		  	<div class="alert alert-font warning mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% elif message == 'You did not pick a topic' %}
+		  	<div class="alert alert-font warning mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% elif message == 'One of the students has not attended Bootcamp on all the 3 days' %}
+		  	<div class="alert alert-font warning mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% elif message %}
+		  	<div class="alert alert-font warning mt-3" role="alert" style="width: 50%;">
+			  {{ message }}
+			</div>
+		  {% endif %}
+		{% endwith %}
+		{% if status==true and select==true and crossed %}
+			<p class="team-form-expired regular1">Team formation time has expired<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+		{% endif %}
+		<div style="width: 50%;">
+			<form method="POST" action="">
+			  <div>
+			  	<h3 class="bold1">Team Member 1<span class="highlighted">*</span></h3>
 			  	<div class="form-group">
-			    	<label for="Email1" style="color:rgb(0,0,153)">Email address</label>
-			    	<input name="Email1" type="email" class="form-control" id="Email1" aria-describedby="emailHelp" required autocomplete="off" style="background-color:rgb(204, 230, 255)">
+			    	<label class="regular1" for="Email1">Email address</label>
+			    	<input name="Email1" type="email" class="form-control shadow-none" id="Email1" aria-describedby="emailHelp" required autocomplete="off" >
 			  	</div>
 			  	<div class="form-group">
-			    	<label for="SRN1" style="color:rgb(0,0,153)">SRN</label>
-			    	<input name="SRN1" type="text" class="form-control" id="SRN1" required autocomplete="off" style="background-color:rgb(204, 230, 255)">
+			    	<label class="regular1" for="SRN1">SRN</label>
+			    	<input name="SRN1" type="text" class="form-control shadow-none" id="SRN1" required autocomplete="off" style="width: 40%;">
 			  	</div>
-			  
-		  </div>
-		  <br>
-		  
-		  <br>
-		  <div>
-		  	<h2 style="margin-bottom: 3%;color:rgb(0,0,153)"><B>Team Member 2*</B></h2>
-		  	<div class="form-group">
-		    	<label for="Email2" style="color:rgb(0,0,153)">Email address</label>
-		    	<input name="Email2" type="email" class="form-control" id="Email2" aria-describedby="emailHelp" required autocomplete="off" style="background-color:rgb(204, 230, 255)">
-		  	</div>
-		  	<div class="form-group">
-		    	<label for="SRN2" style="color:rgb(0,0,153)">SRN</label>
-		    	<input name="SRN2" type="text" class="form-control" id="SRN2" required autocomplete="off" style="background-color:rgb(204, 230, 255)">
-		  	</div>
-		  </div>
-		  <br>
-		  
-		  <br>
-		  <div>
-		  	<h2 style="margin-bottom: 3%;color:rgb(0,0,153)"><B>Team Member 3</B></h2>
-		  	<div class="form-group">
-		    	<label for="Email3" style="color:rgb(0,0,153)">Email address</label>
-		    	<input name="Email3" type="email" class="form-control" id="Email3" aria-describedby="emailHelp" autocomplete="off" style="background-color:rgb(204, 230, 255)">
-		  	</div>
-		  	<div class="form-group">
-		    	<label for="SRN3" style="color:rgb(0,0,153)">SRN</label>
-		    	<input name="SRN3" type="text" class="form-control" id="SRN3" autocomplete="off" style="background-color:rgb(204, 230, 255)">
-		  	</div>
-		  </div>
-		  <br>
-		  
-		  <br>
-		  <div>
-		  	<h2 style="margin-bottom: 3%;color:rgb(0,0,153)"><B>Team Member 4</B></h2>
-		  	<div class="form-group">
-		    	<label for="Email4" style="color:rgb(0,0,153)">Email address</label>
-		    	<input name="Email4" type="email" class="form-control" id="Email4" aria-describedby="emailHelp" autocomplete="off" style="background-color:rgb(204, 230, 255)">
-		  	</div>
-		  	<div class="form-group">
-		    	<label for="SRN4" style="color:rgb(0,0,153)">SRN</label>
-		    	<input name="SRN4" type="text" class="form-control" id="SRN4" autocomplete="off" style="background-color:rgb(204, 230, 255)">
-		  	</div>
-		  </div>
-		  <br>
-		  
-		  <br>
-		  <div class="form-group">
-			<label for="sel1"><h2 style="color:rgb(0,0,153)"><B>Pick a Topic*</B></h2></label>
-			<select class="form-control" id="sel1" name="topic" required="required" style="height: 30px;" style="background-color:rgb(204, 230, 255)">
-				<option disabled selected>
-					Please choose a topic
-				</option>
-				{% for topic in topics %}
-					<option value="{{ topic }}">{{ topic }}</option>
-				{% endfor %}
-			</select>
-		  </div>
-		  <br>
-		  <button type="submit" class="btn btn-primary" style="color:white;background-color: rgb(0,0,153);">Submit</button></br>
-		</form>
+			  </div>
+			  <br>
+			  <br>
+			  <div>
+			  	<h3 class="bold1">Team Member 2<span class="highlighted">*</span></h3>
+			  	<div class="form-group">
+			    	<label class="regular1" for="Email2">Email address</label>
+			    	<input name="Email2" type="email" class="form-control shadow-none" id="Email2" aria-describedby="emailHelp" required autocomplete="off" >
+			  	</div>
+			  	<div class="form-group">
+			    	<label class="regular1" for="SRN2">SRN</label>
+			    	<input name="SRN2" type="text" class="form-control shadow-none" id="SRN2" required autocomplete="off" style="width: 40%;">
+			  	</div>
+			  </div>
+			  <br>
+			  <br>
+			  <div>
+			  	<h3 class="bold1">Team Member 3</h3>
+			  	<div class="form-group">
+			    	<label class="regular1" for="Email3">Email address</label>
+			    	<input name="Email3" type="email" class="form-control shadow-none" id="Email3" aria-describedby="emailHelp" autocomplete="off" >
+			  	</div>
+			  	<div class="form-group">
+			    	<label class="regular1" for="SRN3">SRN</label>
+			    	<input name="SRN3" type="text" class="form-control shadow-none" id="SRN3" autocomplete="off" style="width: 40%;">
+			  	</div>
+			  </div>
+			  <br>
+			  <br>
+			  <div>
+			  	<h3 class="bold1">Team Member 4</h3>
+			  	<div class="form-group">
+			    	<label class="regular1" for="Email4">Email address</label>
+			    	<input name="Email4" type="email" class="form-control shadow-none" id="Email4" aria-describedby="emailHelp" autocomplete="off" >
+			  	</div>
+			  	<div class="form-group">
+			    	<label class="regular1" for="SRN4">SRN</label>
+			    	<input name="SRN4" type="text" class="form-control shadow-none" id="SRN4" autocomplete="off" style="width: 40%;">
+			  	</div>
+			  </div>
+			  <br>
+			  <br>
+			  <div class="form-group">
+				<label for="sel1"><h3 class="bold1">Pick a Topic<span class="highlighted">*</span></h3></label>
+				<select class="form-control" id="sel1" name="topic" required="required" style="height: 40px; background-color: #F4F4F4" >
+					<option disabled selected>
+						Choose a topic
+					</option>
+					{% for topic in topics %}
+						<option value="{{ topic }}">{{ topic }}</option>
+					{% endfor %}
+				</select>
+			  </div>
+			  {% if status==true and select==true and crossed %}
+				<button type="submit" class="link bold" style="float: left; border: none; padding: 2.5%; margin-bottom: 2%; cursor: not-allowed;" disabled>Submit</button>
+			  {% else %}
+			  	<button type="submit" class="link bold" style="float: left; border: none; padding: 2.5%; margin-bottom: 2%;">Submit</button>
+			  {% endif %}
+			</form>
+		</div>
+	</div>
+{%elif status==true and select==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">You did not attend on all the 3 days of Bootcamp<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+	</div>
+{%elif status==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">Assignments are not released still</p>
 	</div>
 {%endif%}
 {% endblock %}

@@ -1,42 +1,8 @@
-<!doctype html>
-<html lang="en">
-  	<head>
-	  	<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
-	    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap" rel="stylesheet">
-	    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-	    <style>
-	    	body{
-	    		background-image: url("https://www.channelfutures.com/files/2019/12/10-Cloud-Computing-2019-MA-877x432.jpg");
-	    		background-repeat: no-repeat;
-				background-attachment: fixed;  
-				background-size: cover;
-	    	}
-	    </style>
-
-  	</head>
-  	<body>
-  		{% with message = get_flashed_messages()[0] %}
-	  		{% if message == 'This team is already evaluated' %}
-			  	<div class="alert alert-danger" role="alert" style="width: 50%;">
-				  	{{ message }}
-				</div>
-	 
-		  	{% endif %}
-		{% endwith %}
+{% extends "teacher_layout.html" %}
+{% block content %}
+{% if status %}
 		<div >
-			<h3 style="background-color: rgb(0,0,153); color:white; height: 60px"><center style="padding-top:10px">Evaluation of the Team with The ID <I>{{id}}</I></center></h3>
+			<h3 style=" color:white; "><center>Evaluation of the Team with The ID <I>{{id}}</I></center></h3>
 			<div style="padding-right: 20px">
 				<a href="{{url_for('assignment')}}" type='button' class="btn btn-primary"style=" font-size:15px ;color:white ; background-color:rgb(0,0,166);float:left; "><i class='fas fa-reply'></i> Back
 	        	</a>
@@ -47,28 +13,28 @@
 			  	<form method = 'POST' action="#">
 			  		<div class="form-group">
 					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Team Id</B></label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="id" value="{{id}}" style="background-color:rgb(204, 230, 255)">
+					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="id" value="{{id}}" style="background-color:rgb(204, 230, 255);font-size:15px"  required>
 				  	</div>
 				  	
 			  		<div class="form-group">
-					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Demo Marks</B></label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="demo" style="background-color:rgb(204, 230, 255)">
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Demo Marks(max 10M)</B></label>
+					    <input type="number"  min="1" max="10" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="demo" style="background-color:rgb(204, 230, 255);font-size:15px"  required>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>PPT Marks</B></label>
-					    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="ppt" style="background-color:rgb(204, 230, 255)">
+					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>PPT Marks(max 10M)</B></label>
+					    <input type="number"  min="1" max="10" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" name="ppt" style="background-color:rgb(204, 230, 255);font-size:15px"  required>
 				  	</div>
 				  	<div class="form-group">
 					    <label for="exampleInputName1" style="color:rgb(51, 153, 255);font-size: 24px;font-family: 'Mukta', sans-serif;"><B>Remarks And Feedback</B></label>
-					    <textarea class="form-control" rows="4" id="comment" name="remarks" style="background-color:rgb(204, 230, 255)"></textarea>
+					    <textarea class="form-control" rows="4" id="comment" name="remarks" style="background-color:rgb(204, 230, 255);font-size:15px"  required></textarea>
 				  	</div>
 				  	
 				  	<center><button type="submit" class="btn btn-primary" style="color:white;background-color: 
-				  	rgb(0,0,153);">Submit</button></center></br>
+				  	rgb(0,0,153);font-size:15px">Submit</button></center></br>
 				  	
 				</form>
 				
 			</div>
 		</div>
-  	</body>
-</html>
+		{%endif%}
+  	{%endblock%}

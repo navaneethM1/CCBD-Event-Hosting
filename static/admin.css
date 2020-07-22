@@ -1,0 +1,9 @@
+.head {
+	background: rgb(0,0,153);
+	color:rgb(217, 217, 217);
+}
+
+.head ul .active,
+.head li .active {
+  color:red;
+}

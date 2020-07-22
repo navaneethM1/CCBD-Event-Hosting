@@ -1,0 +1,53 @@
+{% extends "Layout.html" %}
+{% block content %}
+{%if status==true and select==true%}
+	<div class="container" style="margin-top: 10%;padding-right: 4%">
+		<div class="not-show">
+			<form method="POST" action="">
+				<textarea class="form-control shadow-none mb-3" rows="3" name="query" required placeholder="Start typing a Question" style="background: #F4F4F4; color: #192231;"></textarea>
+				<button type="submit" class="link bold ml-3" style="float: right; border: none; padding: 1.5%; width: 20%; margin-bottom: 2%;">Post Question</button>
+			</form>
+			<button class="link bold mr-3" onclick="cancel();" style="float: right; border: none; padding: 1.5%; width: 20%; margin-bottom: 2%; background-color: #EC5E69;">Cancel</button>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+		<div class="show">
+			<button type="submit" class="link bold" style="float: right; border: none; padding: 1.5%; margin-bottom: 2%;">Ask a Question</button>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+		<div>
+			{% set months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
+			{% if not queries %}
+				<center>
+					<p class="bold no-question">Be the first to ask</p>
+				</center>
+			{% else %}	
+				{% for query in queries %}
+					<div style="border-bottom: 3px solid #24344D;">
+						<p class="bold query mt-4" style="width: 70%;">{{ query.query }}</p>
+						{% if query.answer %}
+							<span class="regular forum_answered_by"  style="width: 70%; color: #415d8b;">Prof. {{ query.teacher }} answered on {{ months[query.timestamp.month-1] }} {{ query.timestamp.day }}, {{ query.timestamp.year }}</span><br>
+							<p class="regular answer mb-4 mt-1" style="width: 70%;">{{ query.answer }}</p>
+						{% else %}
+							<p class="regular answer mb-4" style="width: 70%;"><em>No reply yet</em></p>
+						{% endif %}
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{%elif status==true and select==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">You did not attend on all the 3 days of Bootcamp<i class="ml-2 fa fa-frown-o" aria-hidden="true"></i></p>
+	</div>
+{%elif status==false%}
+	<div class="container" style="margin-top: 10%;">
+		<p class="team-form-expired regular1">Assignments are not released still</p>
+	</div>
+{%endif%}
+{% endblock %}
